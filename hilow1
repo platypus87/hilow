@@ -1,0 +1,59 @@
+
+/* Program designed to simulate
+a high low game*/
+
+/* Hi Low successful
+now need to introduce
+disallowing strings
+adding Ulam's game
+designing program with methods and structs*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <string.h>
+
+
+int main()
+{
+    time_t seed;
+    srand((unsigned) time(&seed));  //this seeds the random generator so it will not generate the same number over and over
+
+    int gennum = rand() % 100+1; // int variable = rand() % maxRange+1, 100 in this case
+    int guessint, guesscnt=0;
+
+    printf("\nWelcome to the Guessing Game!\n");
+    printf("The system has generated a number between 1 and 100.\n");
+    printf("Enter a guess to play: ");
+    scanf("%d", &guessint);     //not the ideal way to input into the system, but works for an INT
+
+    if (guessint == gennum)
+    {
+        printf("Congratulations, you guessed the right number on the first try!"); //easy way to end program if user gets lucky
+    }
+
+    do {        //this keeps the loop going until the user guesses the correct number, no matter how many times it takes
+
+        if (guessint > gennum)
+        {
+            printf("%d is too high, please try again.\n", guessint);
+            scanf("%d",&guessint);
+            guesscnt++;
+        }
+        if (guessint < gennum)
+        {
+            printf("%d is too low, please try again.\n", guessint);
+            scanf("%d", &guessint);
+            guesscnt++;
+        }
+        }while (guessint != gennum);
+
+    if (guessint == gennum)
+    {
+        guesscnt++;
+        printf("\nCongratulations, you guessed the correct number!\nIt took you %d guess%s to get it.\n", guesscnt, guesscnt > 1 ? "es" : "" );
+    }
+
+    return(0);
+}
